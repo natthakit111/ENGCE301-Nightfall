@@ -14,17 +14,17 @@
 ## 👥 Team Members (NightFall)
 | Name | Student ID | Role | GitHub |
 |------|-----------|------|--------|
-| นายจักรกฤษณ์ จาปัญญะ | 66543206040-8 | Team Leader / Tester / Frontend | [@username1](https://github.com/username1) |
-| นายเมย์คาร์ สุวรรณวิสุทธิ | 66543206085-3 | Frontend | [@username2](https://github.com/username2) |
-| นายปรเมษฐ สุริคำ | 66543206038-2 | Frontend / System Analysis | [@username3](https://github.com/username3) |
+| นายจักรกฤษณ์ จาปัญญะ | 66543206040-8 | Team Leader / Tester / Frontend | [@BakaZeno](https://github.com/BakaZeno) |
+| นายเมย์คาร์ สุวรรณวิสุทธิ | 66543206085-3 | Frontend | [@Mekha1104](https://github.com/Mekha1104) |
+| นายปรเมษฐ สุริคำ | 66543206038-2 | Frontend / System Analysis | [@porameter](https://github.com/porameter) |
 | นายณัฐกิตติ์ ยั่งยืนปิยรัตน์ | 66543206014-3 | Backend | [@natthakit111](https://github.com/natthakit111) |
-| นายจิรวัฒน์ มาลัยวรรณ | 66543206070-5 | Backend | [@username3](https://github.com/username3) |
+| นายจิรวัฒน์ มาลัยวรรณ | 66543206070-5 | Backend | [@Jirawat66](https://github.com/Jirawat66) |
 
 
 ## 🚀 Features
-- ✅ โปรแกรมออกกำลังกาย (Workout Program)
-- ✅ บันทึกแคลอรี่ (Calorie Logging)
-- ✅ ติดตามความคืบหน้า (Progress Tracking)
+- ⏳ โปรแกรมออกกำลังกาย (Workout Program)
+- ⏳ บันทึกแคลอรี่ (Calorie Logging)
+- ⏳ ติดตามความคืบหน้า (Progress Tracking)
 - ⏳ ระบบเพิ่มเติมอื่น ๆ (Planned)
 
 
@@ -36,7 +36,7 @@
 
 ## 📂 Project Structure
 
-📁 ENGCE301_GroupXX_Project/  
+📁 ENGCE301_LAB2.GITHUB.IO/  
 ├── 📄 index.html                # Landing Page  
 ├── 📁 css/  
 │   └── 📄 style.css  
@@ -53,13 +53,13 @@
 - [User Interview Notes](./docs/interview_notes.md)
 
 ## 🌐 Demo
-- **Live Demo:** [https://username.github.io/project-name/](https://username.github.io/project-name/) (ถ้า deploy แล้ว)
+- **Live Demo:** [https://bakazeno.github.io/nightfall-lab2.github.io](https://bakazeno.github.io/nightfall-lab2.github.io) (ถ้า deploy แล้ว)
 - **GitHub Pages:** Coming soon...
 
 ## 🏃‍♂️ How to Run Locally
 ```bash
 # 1. Clone repository
-git clone https://github.com/username/project-name.git
+git clone https://github.com/BakaZeno/nightfall-lab2.github.io.git
 
 # 2. Navigate to project folder
 cd project-name
