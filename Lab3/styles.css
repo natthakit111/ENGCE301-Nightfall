@@ -10,48 +10,103 @@
 
 /* ---------- 1. Design Tokens / Variables ---------- */
 :root {
-    /* TODO: Student – กำหนดสีหลักของ Portal ให้ครบ 3–4 สี */
-    --color-bg: #0f172a;           /* background หลัก (ใส่สีที่ต้องการ) */
-    --color-surface: #111827;      /* พื้นของ card/section */
-    --color-primary: #3b82f6;      /* ปุ่มหลัก / highlight */
-    --color-secondary: #22c55e;    /* ปุ่มรอง / accent */
-    --color-text: #e5e7eb;         /* ตัวอักษรหลัก */
-    --color-text-muted: #9ca3af;   /* ตัวอักษรรอง */
-    --color-border: #1f2937;       /* เส้นขอบ card/table */
-
-    --radius-card: 16px;
-    --shadow-soft: 0 16px 30px rgba(0, 0, 0, 0.35);
-
-    /* TODO: Student – เลือก font ที่ต้องการ (จาก Google Fonts)
-       แล้วไปเพิ่ม <link> ที่ index.html / about.html / my-labs.html */
+    /* 🎨 Color Palette - Modern Dark Tech Theme */
+    --color-bg: #0a0e1a;              /* background หลัก - น้ำเงินดำเข้ม */
+    --color-surface: #141824;         /* พื้นของ card/section */
+    --color-surface-hover: #1a1f2e;   /* พื้นเมื่อ hover */
+    
+    /* Primary Colors - Blue gradient */
+    --color-primary: #3b82f6;         /* น้ำเงินสดใส */
+    --color-primary-dark: #2563eb;    /* น้ำเงินเข้ม */
+    --color-primary-light: #60a5fa;   /* น้ำเงินอ่อน */
+    
+    /* Secondary Colors - Cyan/Teal */
+    --color-secondary: #06b6d4;       /* ฟ้าสดใส */
+    --color-accent: #10b981;          /* เขียวมรกต */
+    --color-warning: #f59e0b;         /* ส้ม */
+    --color-danger: #ef4444;          /* แดง */
+    
+    /* Text Colors */
+    --color-text: #f1f5f9;            /* ตัวอักษรหลัก - ขาวนวล */
+    --color-text-secondary: #cbd5e1;  /* ตัวอักษรรอง */
+    --color-text-muted: #94a3b8;      /* ตัวอักษรจาง */
+    --color-text-dim: #64748b;        /* ตัวอักษรจางมาก */
+    
+    /* Border & Shadow */
+    --color-border: #1e293b;          /* เส้นขอบ */
+    --color-border-light: #334155;    /* เส้นขอบอ่อน */
+    
+    /* Radius & Shadows */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-full: 999px;
+    
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+    
+    /* Typography - ใช้ Sarabun ตามที่กำหนดไว้แล้ว */
     font-family: 'Sarabun', sans-serif;
+    
+    /* Spacing Scale */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.25s ease;
+    --transition-slow: 0.35s ease;
 }
 
 /* ---------- 2. Global Styles ---------- */
 *,
 *::before,
 *::after {
-    box-sizing: border-box;  /* สำคัญมาก: คุม Box Model ให้ predictable */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     margin: 0;
     padding: 0;
-    background: radial-gradient(circle at top, #1f2933 0%, #020617 55%);
+    background: 
+        radial-gradient(circle at 20% 10%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.06) 0%, transparent 40%),
+        linear-gradient(180deg, #0f1419 0%, #0a0e1a 100%);
+    background-attachment: fixed;
     color: var(--color-text);
     font-family: 'Sarabun', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
 }
 
-/* จำกัดความกว้างของ content ให้อ่านง่าย */
+/* จำกัดความกว้างของ content */
 .page-container {
-    max-width: 1200px;   /* TODO: ลองปรับดู 960 / 1200 / 1440 และสังเกตความต่าง */
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 16px 20px 40px;
+    padding: var(--space-md) var(--space-lg) var(--space-2xl);
 }
 
 /* ลิงก์ทั่วไป */
 a {
-    color: inherit;
+    color: var(--color-primary-light);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-primary);
 }
 
 /* ---------- 3. Header + Navbar ---------- */
@@ -60,62 +115,103 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 20px;
-    margin-bottom: 24px;
-    background: rgba(15, 23, 42, 0.9);
-    border-radius: 999px;
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-xl);
+    background: rgba(20, 24, 36, 0.95);
+    backdrop-filter: blur(12px);
+    border-radius: var(--radius-full);
     border: 1px solid var(--color-border);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+    box-shadow: var(--shadow-md);
     position: sticky;
-    top: 10px;
-    z-index: 10;
+    top: 12px;
+    z-index: 100;
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.site-header:hover {
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+}
+
+.logo:hover {
+    transform: translateY(-1px);
 }
 
 .logo-mark {
-    background: var(--color-primary);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
     color: white;
-    padding: 6px 10px;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    text-transform: uppercase;
 }
 
 .logo-text {
+    font-family: 'Sarabun', sans-serif;
     font-weight: 600;
-    letter-spacing: 0.03em;
-    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    font-size: 1.05rem;
+    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-text-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .main-nav {
     display: flex;
-    gap: 16px;
-    font-size: 0.9rem;
+    gap: var(--space-sm);
+    font-size: 0.95rem;
 }
 
 .nav-link {
     text-decoration: none;
     color: var(--color-text-muted);
-    padding: 6px 10px;
-    border-radius: 999px;
-    transition: background 0.2s, color 0.2s, transform 0.15s;
+    padding: 10px 18px;
+    border-radius: var(--radius-full);
+    font-weight: 500;
+    position: relative;
+    transition: all var(--transition-base);
+    overflow: hidden;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(148, 163, 184, 0.1);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    border-radius: var(--radius-full);
+}
+
+.nav-link:hover::before {
+    opacity: 1;
 }
 
 .nav-link:hover {
-    background: rgba(148, 163, 184, 0.2);
     color: var(--color-text);
     transform: translateY(-1px);
 }
 
-/* แสดง active menu */
 .nav-link.active {
-    background: var(--color-primary);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.nav-link.active::before {
+    display: none;
 }
 
 /* ---------- 4. Hero Section ---------- */
@@ -123,69 +219,125 @@ a {
 .hero-section {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 1.6fr);
-    gap: 32px;
+    gap: var(--space-xl);
     align-items: center;
-    padding: 32px 24px;
-    border-radius: 24px;
-    background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.25), transparent 55%),
-                radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.25), transparent 60%),
-                rgba(15, 23, 42, 0.9);
-    box-shadow: var(--shadow-soft);
-    margin-bottom: 32px;
+    padding: var(--space-2xl) var(--space-xl);
+    border-radius: var(--radius-xl);
+    background: 
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.12), transparent 50%),
+        radial-gradient(circle at bottom right, rgba(6, 182, 212, 0.08), transparent 55%),
+        rgba(20, 24, 36, 0.95);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-lg);
+    margin-bottom: var(--space-xl);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    opacity: 0.5;
 }
 
 .hero-content h1 {
-    font-size: 2rem;
-    margin: 0 0 12px;
-    line-height: 1.3;
+    font-family: 'Sarabun', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin: 0 0 var(--space-md);
+    line-height: 1.2;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--color-text) 0%, var(--color-text-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .hero-subtitle {
-    margin: 0 0 18px;
-    font-size: 0.95rem;
-    color: var(--color-text-muted);
+    margin: 0 0 var(--space-lg);
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
 }
 
 .hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 12px;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
 }
 
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 16px;
-    border-radius: 999px;
-    font-size: 0.9rem;
+    padding: 12px 24px;
+    border-radius: var(--radius-full);
+    font-size: 0.95rem;
+    font-weight: 600;
     text-decoration: none;
     border: 1px solid transparent;
     cursor: pointer;
-    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+    font-family: 'Sarabun', sans-serif;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.btn:hover::before {
+    opacity: 1;
 }
 
 .btn.primary {
-    background: var(--color-primary);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     color: white;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+}
+
+.btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
 }
 
 .btn.secondary {
-    background: transparent;
+    background: rgba(148, 163, 184, 0.05);
     color: var(--color-text);
-    border-color: var(--color-border);
+    border-color: var(--color-border-light);
+    backdrop-filter: blur(8px);
 }
 
-.btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+.btn.secondary:hover {
+    background: rgba(148, 163, 184, 0.1);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
-/* ข้อความอธิบายย่อท้าย Hero */
 .hero-note {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.hero-note::before {
+    content: '💡';
+    font-size: 1rem;
 }
 
 /* Infographic ด้านขวา Hero */
@@ -193,78 +345,126 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: var(--space-md);
 }
 
 .hero-flow-card {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    padding: 16px;
-    border-radius: 999px;
-    border: 1px dashed rgba(148, 163, 184, 0.7);
-    background: rgba(15, 23, 42, 0.9);
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    border-radius: var(--radius-full);
+    border: 2px dashed var(--color-border-light);
+    background: rgba(20, 24, 36, 0.8);
+    backdrop-filter: blur(8px);
+    transition: all var(--transition-base);
+}
+
+.hero-flow-card:hover {
+    border-color: var(--color-primary);
+    background: rgba(20, 24, 36, 0.95);
+    transform: scale(1.02);
 }
 
 .flow-step {
-    padding: 6px 10px;
-    border-radius: 999px;
-    background: rgba(30, 64, 175, 0.9);
-    font-size: 0.8rem;
+    padding: 8px 14px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(37, 99, 235, 0.3) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-primary-light);
+    transition: all var(--transition-fast);
+}
+
+.flow-step:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(37, 99, 235, 0.4) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
 }
 
 .flow-arrow {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     color: var(--color-text-muted);
-    padding: 0 4px;
+    padding: 0 var(--space-xs);
 }
 
 .hero-visual-caption {
-    margin-top: 10px;
-    font-size: 0.8rem;
+    margin-top: var(--space-sm);
+    font-size: 0.85rem;
     color: var(--color-text-muted);
+    text-align: center;
 }
 
 /* ---------- 5. Sections Shared Styles ---------- */
 
 .section {
-    margin-bottom: 32px;
-    padding: 20px 24px;
-    border-radius: 20px;
-    background: rgba(15, 23, 42, 0.85);
+    margin-bottom: var(--space-xl);
+    padding: var(--space-lg) var(--space-xl);
+    border-radius: var(--radius-xl);
+    background: rgba(20, 24, 36, 0.85);
+    backdrop-filter: blur(8px);
     border: 1px solid var(--color-border);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-base);
+}
+
+.section:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-border-light);
+}
+
+.section-header {
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-md);
+    border-bottom: 1px solid var(--color-border);
 }
 
 .section-header h2 {
-    margin: 0 0 6px;
-    font-size: 1.3rem;
+    margin: 0 0 var(--space-sm);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
 }
 
 .section-header p {
-    margin: 0 0 12px;
-    font-size: 0.85rem;
+    margin: 0;
+    font-size: 0.9rem;
     color: var(--color-text-muted);
+    line-height: 1.6;
 }
 
 /* สำหรับ layout ใน about.html */
 .content-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
 }
 
 .content-card {
-    background: rgba(15, 23, 42, 0.95);
-    border-radius: 16px;
-    padding: 16px 18px;
+    background: rgba(20, 24, 36, 0.95);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
     border: 1px solid var(--color-border);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    transition: all var(--transition-base);
 }
 
-/* muted text */
+.content-card:hover {
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
 .text-muted {
     color: var(--color-text-muted);
 }
@@ -273,81 +473,129 @@ a {
 
 .labs-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
 }
 
 .lab-card {
-    background: rgba(15, 23, 42, 0.95);
-    border-radius: 16px;
-    padding: 16px 18px;
+    background: rgba(20, 24, 36, 0.95);
+    backdrop-filter: blur(8px);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
     border: 1px solid var(--color-border);
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    font-size: 0.9rem;
-    transition: transform 0.15s, box-shadow 0.2s, border-color 0.2s;
+    gap: var(--space-md);
+    font-size: 0.95rem;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.lab-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    opacity: 0;
+    transition: opacity var(--transition-base);
 }
 
 .lab-card:hover {
-    transform: translateY(-2px);
-    border-color: rgba(59, 130, 246, 0.8);
-    box-shadow: 0 14px 26px rgba(15, 23, 42, 0.6);
+    transform: translateY(-4px);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-lg), 0 0 20px rgba(59, 130, 246, 0.2);
+    background: rgba(26, 31, 46, 0.95);
+}
+
+.lab-card:hover::before {
+    opacity: 1;
 }
 
 .lab-meta {
     display: flex;
     justify-content: space-between;
-    font-size: 0.75rem;
+    align-items: center;
+    font-size: 0.8rem;
     color: var(--color-text-muted);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
 }
 
 .badge {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 2px 8px;
-    border-radius: 999px;
-    font-size: 0.7rem;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
 }
 
 .badge-lab {
-    background: rgba(59, 130, 246, 0.2);
-    color: #bfdbfe;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.3));
+    color: #93c5fd;
+    border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
-/* Lab deadline */
 .lab-deadline {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-text-secondary);
+}
+
+.lab-deadline::before {
+    content: '📅';
+    font-size: 0.9rem;
 }
 
 .lab-desc {
     margin: 0;
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
 }
 
-/* แท็กด้านล่างการ์ด Lab */
 .lab-tags {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    font-size: 0.75rem;
+    gap: var(--space-sm);
+    font-size: 0.8rem;
 }
 
 .lab-tags li {
-    padding: 3px 8px;
-    border-radius: 999px;
-    background: rgba(148, 163, 184, 0.15);
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
+    background: rgba(148, 163, 184, 0.1);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    color: var(--color-text-muted);
+    transition: all var(--transition-fast);
 }
 
-/* Highlight การ์ดที่ยังเป็น TODO ของนักศึกษา */
+.lab-tags li:hover {
+    background: rgba(148, 163, 184, 0.15);
+    color: var(--color-text-secondary);
+    transform: translateY(-1px);
+}
+
+/* Highlight การ์ดที่ยังเป็น TODO */
 .lab-card.todo {
     border-style: dashed;
-    opacity: 0.9;
+    border-color: var(--color-warning);
+    opacity: 0.85;
+}
+
+.lab-card.todo::before {
+    background: linear-gradient(90deg, var(--color-warning), var(--color-danger));
 }
 
 /* ---------- 7. My Status Table ---------- */
@@ -355,89 +603,116 @@ a {
 .status-table {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    font-size: 0.85rem;
+    gap: var(--space-sm);
+    font-size: 0.9rem;
 }
 
 .status-row {
     display: grid;
-    grid-template-columns: 0.6fr 2fr 1.1fr 0.7fr;
-    gap: 8px;
-    padding: 8px 10px;
-    border-radius: 10px;
-    border: 1px solid rgba(31, 41, 55, 0.9);
-    background: rgba(15, 23, 42, 0.9);
+    grid-template-columns: 0.6fr 2fr 1.1fr 0.8fr;
+    gap: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    background: rgba(20, 24, 36, 0.9);
+    backdrop-filter: blur(8px);
+    transition: all var(--transition-base);
+    align-items: center;
+}
+
+.status-row:not(.status-header):hover {
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-light);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
 }
 
 .status-row.status-header {
-    background: rgba(30, 64, 175, 0.7);
-    border-color: transparent;
-    font-weight: 600;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.3));
+    border-color: rgba(59, 130, 246, 0.4);
+    font-weight: 700;
+    color: var(--color-text);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
 }
 
-/* ป้ายสถานะ */
 .status-tag {
     display: inline-flex;
-    padding: 2px 8px;
-    border-radius: 999px;
-    font-size: 0.7rem;
-    font-weight: 600;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid;
 }
 
 .status-done {
-    background: rgba(22, 163, 74, 0.2);
-    color: #bbf7d0;
+    background: rgba(16, 185, 129, 0.15);
+    color: #6ee7b7;
+    border-color: rgba(16, 185, 129, 0.3);
 }
 
 .status-pending {
-    background: rgba(234, 179, 8, 0.18);
-    color: #facc15;
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+    border-color: rgba(245, 158, 11, 0.3);
 }
 
 .status-late {
-    background: rgba(220, 38, 38, 0.25);
-    color: #fecaca;
+    background: rgba(239, 68, 68, 0.15);
+    color: #fca5a5;
+    border-color: rgba(239, 68, 68, 0.3);
 }
 
-/* แถว TODO ให้ดูต่างออกไปนิดหน่อย */
 .status-row.todo {
     border-style: dashed;
+    border-color: var(--color-warning);
 }
 
-/* Note ใต้ตาราง */
 .section-note {
-    margin-top: 10px;
-    font-size: 0.8rem;
+    margin-top: var(--space-md);
+    padding: var(--space-md);
+    font-size: 0.85rem;
     color: var(--color-text-muted);
+    background: rgba(148, 163, 184, 0.05);
+    border-left: 3px solid var(--color-primary);
+    border-radius: var(--radius-sm);
+    line-height: 1.6;
 }
 
 /* ---------- 8. Footer ---------- */
 
 .site-footer {
-    margin-top: 24px;
-    padding-top: 16px;
+    margin-top: var(--space-2xl);
+    padding: var(--space-lg) 0;
     border-top: 1px solid var(--color-border);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--color-text-muted);
     text-align: center;
 }
 
 .footer-small {
-    margin-top: 4px;
+    margin-top: var(--space-sm);
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
 }
 
 /* ---------- 9. Responsive (มือถือ/จอเล็ก) ---------- */
 
 @media (max-width: 768px) {
+    .page-container {
+        padding: var(--space-sm) var(--space-md) var(--space-xl);
+    }
+
     .site-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 8px;
-        border-radius: 18px;
-    }
-
-    .hero-section {
-        grid-template-columns: 1fr;
+        gap: var(--space-md);
+        border-radius: var(--radius-lg);
+        padding: var(--space-md);
     }
 
     .main-nav {
@@ -446,12 +721,85 @@ a {
         flex-wrap: wrap;
     }
 
+    .hero-section {
+        grid-template-columns: 1fr;
+        padding: var(--space-lg);
+        gap: var(--space-lg);
+    }
+
+    .hero-content h1 {
+        font-size: 1.75rem;
+    }
+
+    .labs-grid {
+        grid-template-columns: 1fr;
+    }
+
     .status-row {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto auto;
+        gap: var(--space-sm);
+        padding: var(--space-md);
     }
+
     .status-row span:nth-child(1),
     .status-row span:nth-child(2) {
-        font-weight: 500;
+        font-weight: 600;
     }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .status-row {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+    }
+}
+
+/* ---------- 10. Animations ---------- */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.lab-card,
+.content-card,
+.section {
+    animation: fadeIn 0.4s ease-out backwards;
+}
+
+.lab-card:nth-child(1) { animation-delay: 0.05s; }
+.lab-card:nth-child(2) { animation-delay: 0.1s; }
+.lab-card:nth-child(3) { animation-delay: 0.15s; }
+.lab-card:nth-child(4) { animation-delay: 0.2s; }
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+    background: rgba(59, 130, 246, 0.3);
+    color: var(--color-text);
 }
