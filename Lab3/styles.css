@@ -332,12 +332,8 @@ a:hover {
     color: var(--color-text-muted);
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-}
-
-.hero-note::before {
-    content: '💡';
-    font-size: 1rem;
+    gap: 0.35rem; 
+    flex-wrap: wrap; 
 }
 
 /* Infographic ด้านขวา Hero */
