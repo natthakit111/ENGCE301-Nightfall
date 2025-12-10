@@ -111,7 +111,7 @@ lab3/
 # 📌 6. Web Lab (HTML/CSS)
 
 ## 6.1 เว็บไซต์ที่ Deploy แล้ว  
-👉 **<ลิงก์ Deploy ที่นี่>**
+👉 https://bakazeno.github.io/nightfall-lab3.github.io/
 
 ## 6.2 Git Repository  
 👉 https://github.com/natthakit111/ENGCE301-Nightfall/tree/main/Lab3
