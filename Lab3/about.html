@@ -39,22 +39,46 @@
                 <article class="content-card">
                     <h3>System Overview</h3>
                     <p>
-                        <!-- TODO: Student – เขียนคำอธิบายสั้น ๆ ของระบบตาม SRS ของกลุ่ม -->
-                        The portal allows students to view lab details, submit lab work,
-                        and track their grades, while instructors can create labs,
-                        review submissions and provide feedback.
+                        ระบบนี้เป็นเว็บแอปพลิเคชันสำหรับวิชา <strong>ENGCE301</strong> ที่ใช้จัดการงาน LAB ทั้งหมด
+                        นักศึกษาสามารถดูรายการ LAB, อ่านรายละเอียด, อัปโหลดไฟล์ส่งงาน และตรวจสอบสถานะ/คะแนนของตนเองได้
+                        ส่วนผู้สอนสามารถสร้าง LAB, ตรวจงาน, ให้คะแนน และให้ Feedback ผ่านระบบเดียวกัน
+                        <br><br>
+                        สำหรับวิชานี้ หน้าเว็บทั้งหมดเป็นเพียง <strong>Prototype UI</strong>
+                        (เช่น Landing Page, My Labs Page, About Page) ที่พัฒนาด้วย HTML/CSS เท่านั้น
+                        ยังไม่มี backend จริง แต่เตรียมโครงไว้สำหรับต่อยอดในอนาคตตาม SRS ที่กำหนดไว้
                     </p>
                 </article>
 
                 <article class="content-card">
                     <h3>From SRS to Screens</h3>
                     <ul>
-                        <!-- TODO: Student – ปรับให้ตรงกับ SRS จริงของกลุ่ม -->
-                        <li><strong>FR-2 View Lab List</strong> → Upcoming Labs section on Home page</li>
-                        <li><strong>FR-3 Submit Lab</strong> → Future page: Lab Detail / Submission form</li>
-                        <li><strong>FR-6 Grading &amp; Feedback</strong> → My Labs page + Instructor view</li>
+                        <li>
+                            <strong>FR-1 View Lab List</strong>
+                            &rarr; แสดงผลเป็นส่วน <strong>“Upcoming Labs”</strong> บนหน้าแรก (<code>index.html</code>)
+                        </li>
+                        <li>
+                            <strong>FR-2 View Lab Details</strong>
+                            &rarr; วางแผนเป็นหน้า <strong>Lab Details</strong> แยกต่างหากในอนาคต
+                            (ใน Prototype นี้อธิบายไว้ใน About และการ์ดของ LAB)
+                        </li>
+                        <li>
+                            <strong>FR-3 Submit Lab</strong> + <strong>FR-4 Handle Late Submission</strong>
+                            &rarr; ออกแบบเป็น <strong>ฟอร์มส่งงาน LAB</strong> และแสดงสถานะ
+                            (เช่น Submitted / Late) บนหน้า My Labs และ My Status
+                        </li>
+                        <li>
+                            <strong>FR-7 Grade &amp; Feedback</strong>
+                            &rarr; จำลองผ่าน <strong>Instructor Grading Prototype</strong> (เช่นหน้า Maim-Alter.html)
+                            และคอลัมน์คะแนน/Feedback ในตารางสถานะ LAB
+                        </li>
+                        <li>
+                            <strong>FR-8 View My Lab Status</strong>
+                            &rarr; แสดงผลในหน้า <strong>My Lab Status</strong> บน <code>my-labs.html</code>
+                            และ section “My Lab Status (Mock Data)” บนหน้าแรก
+                        </li>
                     </ul>
                 </article>
+
             </div>
         </section>
 
@@ -90,14 +114,56 @@
                 </article>
 
                 <article class="content-card">
-                    <h3>TODO: Your Group Mapping</h3>
+                    <h3>Term Project Mapping – FitnessPal</h3>
                     <p>
-                        <!-- TODO: Student – ให้กลุ่มของคุณกรอก mapping จริงของกลุ่มที่ใช้ใน Term Project -->
-                        Replace this text with your own mapping between:
-                        <strong>your SRS / User Stories / Use Cases</strong> and the
-                        actual pages/components in this mini portal.
+                        สำหรับ <strong>Term Project</strong> ของกลุ่มเรา คือระบบ
+                        <strong>FitnessPal</strong> ซึ่งเป็นเว็บแอปสำหรับช่วยติดตามสุขภาพแบบครบวงจร
+                        (การออกกำลังกาย, โภชนาการ และความก้าวหน้าของร่างกาย)
+                        เราใช้กระบวนการเดียวกับ ENGCE301 Lab Submission Portal คือ
+                        <strong>SRS → User Stories → Use Cases → UI</strong> เช่นเดียวกัน
+                    </p>
+                    <ul>
+                        <li>
+                            <strong>SRS – FitnessPal</strong><br>
+                            <span class="text-muted">
+                                ระบุฟีเจอร์หลัก เช่น Workout Program, Calorie Logging,
+                                Progress Tracking และเป้าหมายด้านสุขภาพของผู้ใช้
+                                (ลดน้ำหนัก, เพิ่มกล้าม ฯลฯ)
+                            </span>
+                        </li>
+                        <li>
+                            <strong>User Stories (ตัวอย่าง)</strong><br>
+                            <span class="text-muted">
+                                – US-FP-01: ในฐานะผู้ใช้ ฉันต้องการบันทึกการออกกำลังกายในแต่ละวัน<br>
+                                – US-FP-02: ในฐานะผู้ใช้ ฉันต้องการบันทึกอาหาร/แคลอรี่ที่กินในแต่ละมื้อ<br>
+                                – US-FP-03: ในฐานะผู้ใช้ ฉันต้องการดูสรุปความก้าวหน้าของน้ำหนักและสัดส่วนตัวเอง
+                            </span>
+                        </li>
+                        <li>
+                            <strong>Use Cases (ตัวอย่าง)</strong><br>
+                            <span class="text-muted">
+                                – UC-FP-01: Log Workout → ฟอร์มบันทึกชุดท่า, เวลา, แคลอรี่ที่เผาผลาญ<br>
+                                – UC-FP-02: Log Meal → ฟอร์มบันทึกเมนู, ปริมาณ, แคลอรี่รวมต่อมื้อ<br>
+                                – UC-FP-03: View Progress Dashboard → หน้า Dashboard แสดงกราฟน้ำหนัก/สัดส่วน/แคลอรี่
+                            </span>
+                        </li>
+                        <li>
+                            <strong>UI Components ใน FitnessPal</strong><br>
+                            <span class="text-muted">
+                                – หน้า Landing Page ของ FitnessPal → สรุปฟีเจอร์หลัก + ปุ่มเริ่มต้นใช้งาน<br>
+                                – หน้า Workout Program → แสดงโปรแกรมออกกำลังกายและให้ผู้ใช้ Log Workout ตาม UC-FP-01<br>
+                                – หน้า Calorie Logging → ฟอร์มบันทึกอาหารตาม US-FP-02 / UC-FP-02<br>
+                                – หน้า Progress Tracking → Dashboard แสดงกราฟ/สถิติ ตาม US-FP-03 / UC-FP-03
+                            </span>
+                        </li>
+                    </ul>
+                    <p>
+                        สรุปคือ ถึงแม้หน้าเว็บใน LAB 3 จะเป็น <strong>Lab Submission Portal</strong> แต่แนวคิด
+                        การออกแบบจาก <strong>SRS → User Stories → Use Cases → Web UI</strong> ชุดเดียวกันนี้
+                        ถูกนำไปใช้จริงใน <strong>Term Project: FitnessPal</strong> ของกลุ่มเราด้วย
                     </p>
                 </article>
+
             </div>
         </section>
     </main>
