@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>ENGCE301 Lab Submission Portal - Grading Flow</title>
+  <style>
+    /* ====== Global Styles ====== */
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f8;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1f4e79, #285f8f);
+      color: #fff;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    header .title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    header .role-badge {
+      background-color: rgba(255, 255, 255, 0.15);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 24px auto 40px;
+      padding: 0 16px;
+    }
+
+    /* ====== Top Navigation (fake tabs) ====== */
+    .top-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .top-nav a {
+      text-decoration: none;
+    }
+
+    .nav-btn {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background-color: #e4e7f0;
+      border: 1px solid #cfd4e6;
+      color: #333;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s, box-shadow 0.1s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-btn:hover {
+      background-color: #d8dcec;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-btn.primary {
+      background-color: #1f4e79;
+      color: #fff;
+      border-color: #1f4e79;
+    }
+
+    /* ====== Card Layout ====== */
+    .card {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 12px;
+    }
+
+    /* ====== Table ====== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid #e0e2eb;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f1f3fa;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+      background-color: #fafbff;
+    }
+
+    .status-badge {
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .status-submitted {
+      background-color: #e0f5e8;
+      color: #216e3a;
+    }
+
+    .status-not-submitted {
+      background-color: #ffe8e5;
+      color: #b32a1f;
+    }
+
+    .status-late {
+      background-color: #fff2d9;
+      color: #946108;
+    }
+
+    .status-graded {
+      background-color: #dde9ff;
+      color: #234f9c;
+    }
+
+    .btn-table {
+      padding: 6px 10px;
+      font-size: 13px;
+      border-radius: 6px;
+      border: 1px solid #c0c6dd;
+      background-color: #f5f6fe;
+      cursor: pointer;
+    }
+
+    .btn-table:hover {
+      background-color: #e3e6fb;
+    }
+
+    /* ====== Detail Layout ====== */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1.6fr;
+      gap: 20px;
+    }
+
+    .detail-block {
+      margin-bottom: 10px;
+    }
+
+    .detail-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .detail-value {
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    .file-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      font-size: 14px;
+      color: #1f4e79;
+      text-decoration: none;
+    }
+
+    .file-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ====== Form ====== */
+    form {
+      margin-top: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+      font-weight: 500;
+    }
+
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #cfd4e6;
+      font-size: 14px;
+      resize: vertical;
+    }
+
+    input[type="number"]:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #1f4e79;
+      box-shadow: 0 0 0 2px rgba(31, 78, 121, 0.15);
+    }
+
+    textarea {
+      min-height: 90px;
+    }
+
+    .form-hint {
+      font-size: 12px;
+      color: #777;
+    }
+
+    .btn-primary {
+      padding: 8px 18px;
+      border-radius: 999px;
+      border: none;
+      background-color: #1f4e79;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background-color: #204567;
+    }
+
+    .btn-secondary {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid #c0c6dd;
+      background-color: #fff;
+      color: #333;
+      font-size: 14px;
+      cursor: pointer;
+      margin-right: 8px;
+    }
+
+    .btn-secondary:hover {
+      background-color: #f4f5fb;
+    }
+
+    /* ====== Messages (for AF-1 / AF-2 mock) ====== */
+    .message-area {
+      margin-top: 10px;
+      font-size: 13px;
+    }
+
+    .msg {
+      padding: 8px 10px;
+      border-radius: 8px;
+      margin-bottom: 6px;
+    }
+
+    .msg-info {
+      background-color: #e8f1ff;
+      border: 1px solid #c0d4ff;
+      color: #234f9c;
+    }
+
+    .msg-error {
+      background-color: #ffe8e5;
+      border: 1px solid #f0b0a5;
+      color: #b32a1f;
+    }
+
+    .msg-success {
+      background-color: #e2f5ea;
+      border: 1px solid #a8dec0;
+      color: #216e3a;
+    }
+
+    /* ====== Section Head Separator ====== */
+    .section-heading {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 24px 0 8px;
+      color: #1f4e79;
+    }
+
+    .badge-role-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #777;
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="title">ENGCE301 Lab Submission Portal</div>
+    <div class="role-badge">Prototype UI – Grading Flow</div>
+  </header>
+
+  <main>
+    <!-- Top Navigation: fake links to sections -->
+    <nav class="top-nav">
+      <a href="#instructor-submissions"><button class="nav-btn primary">Instructor – Submissions</button></a>
+      <a href="#instructor-grading"><button class="nav-btn">Instructor – Grade Submission</button></a>
+      <a href="#student-my-labs"><button class="nav-btn">Student – My Labs</button></a>
+    </nav>
+
+    <!-- ===================== INSTRUCTOR VIEW ===================== -->
+    <div class="section-heading">Instructor View</div>
+
+    <!-- 1) Submissions List (Step 1–3) -->
+    <section id="instructor-submissions" class="card">
+      <div class="card-header">
+        <div>
+          <div class="badge-role-label">INSTRUCTOR</div>
+          <div class="card-title">Lab 3 – HTML Layout (Submissions)</div>
+          <div class="subtitle">
+            ขั้นตอนที่ 1–3: ผู้สอนเปิดหน้า Submissions และเลือกรายการนักศึกษาที่ต้องการให้คะแนน
+          </div>
+        </div>
+        <div>
+          <span class="status-badge status-submitted">Deadline: 2025-02-15 23:59</span>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Submitted At</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>660100001</td>
+            <td>Student A</td>
+            <td>2025-02-15 21:10</td>
+            <td><span class="status-badge status-submitted">Submitted</span></td>
+            <td><a href="#instructor-grading"><button class="btn-table">View / Grade</button></a></td>
+          </tr>
+          <tr>
+            <td>660100002</td>
+            <td>Student B</td>
+            <td>–</td>
+            <td><span class="status-badge status-not-submitted">Not submitted</span></td>
+            <td>–</td>
+          </tr>
+          <tr>
+            <td>660100003</td>
+            <td>Student C</td>
+            <td>2025-02-16 00:30</td>
+            <td><span class="status-badge status-late">Late</span></td>
+            <td><button class="btn-table">View / Grade</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 2) Grade Submission (Step 4–8 + AF-1, AF-2 mock messages) -->
+    <section id="instructor-grading" class="card">
+      <div class="card-header">
+        <div>
+          <div class="badge-role-label">INSTRUCTOR</div>
+          <div class="card-title">Grade Submission – Student A</div>
+          <div class="subtitle">
+            ขั้นตอนที่ 4–8: ผู้สอนดูรายละเอียด submission และให้คะแนน/feedback
+          </div>
+        </div>
+        <div>
+          <a href="#instructor-submissions"><button class="btn-secondary">← Back to Submissions</button></a>
+        </div>
+      </div>
+
+      <div class="detail-grid">
+        <!-- Left side: Submission info -->
+        <div>
+          <div class="detail-block">
+            <div class="detail-label">Lab</div>
+            <div class="detail-value">Lab 3 – HTML Layout</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">Student</div>
+            <div class="detail-value">660100001 – Student A</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">Submitted At</div>
+            <div class="detail-value">2025-02-15 21:10 (On time)</div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">Submission Status</div>
+            <div class="detail-value">
+              <span class="status-badge status-submitted">Submitted</span>
+            </div>
+          </div>
+          <div class="detail-block">
+            <div class="detail-label">Submission File</div>
+            <a href="#" class="file-link">
+              📎 lab3_layout_studentA.zip
+            </a>
+            <div class="form-hint">* ในระบบจริงจะเป็นลิงก์ดาวน์โหลดไฟล์ที่นักศึกษาส่ง</div>
+          </div>
+        </div>
+
+        <!-- Right side: Grading form -->
+        <div>
+          <form>
+            <div class="form-group">
+              <label for="score">Score (0–100) / คะแนน</label>
+              <input
+                type="number"
+                id="score"
+                name="score"
+                min="0"
+                max="100"
+                placeholder="เช่น 85"
+                required
+              />
+              <div class="form-hint">
+                ระบบจริงจะตรวจสอบว่าคะแนนต้องอยู่ในช่วง 0–100 (ใช้สำหรับ AF-1)
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="feedback">Feedback / ข้อเสนอแนะ</label>
+              <textarea
+                id="feedback"
+                name="feedback"
+                placeholder="จุดที่ทำดี / จุดที่ควรปรับปรุง"
+              >โครงสร้าง HTML ถูกต้อง ใช้ semantic tag ได้ดี
+ลองจัด CSS ให้ spacing สม่ำเสมอมากขึ้น</textarea>
+              <div class="form-hint">
+                ข้อความนี้จะแสดงให้นักศึกษาเห็นในหน้า My Labs เมื่อสถานะเป็น “Graded”
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button type="button" class="btn-secondary">Cancel</button>
+              <button type="submit" class="btn-primary">Save Grade</button>
+            </div>
+
+            <!-- Message area to show AF-1 / AF-2 scenarios (mock UI) -->
+            <div class="message-area">
+              <!-- ตัวอย่างข้อความสำเร็จ (Main Flow ส่งตรงเวลา / Save ผ่าน) -->
+              <div class="msg msg-success">
+                ✅ ระบบบันทึกคะแนนและ feedback สำเร็จ (timestamp: 2025-02-15 22:05)  
+                สถานะ submission ถูกเปลี่ยนเป็น <b>Graded</b>
+              </div>
+
+              <!-- ตัวอย่างข้อความ AF-1: invalid score -->
+              <div class="msg msg-error">
+                ⚠ AF-1: รูปแบบคะแนนไม่ถูกต้อง – โปรดกรอกตัวเลขระหว่าง 0 ถึง 100 เท่านั้น
+              </div>
+
+              <!-- ตัวอย่างข้อความ AF-2: save failed -->
+              <div class="msg msg-error">
+                ❌ AF-2: ไม่สามารถบันทึกคะแนนได้ กรุณาลองใหม่อีกครั้ง  
+                (สถานะ submission ยังไม่ถูกเปลี่ยน และยังไม่แสดงคะแนนให้นักศึกษา)
+              </div>
+
+              <div class="msg msg-info">
+                หมายเหตุ: ใน Prototype นี้เป็นเพียงการจำลองข้อความ  
+                เวอร์ชันจริงจะใช้ JavaScript/Backend ในการตรวจสอบและบันทึกข้อมูล
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== STUDENT VIEW ===================== -->
+    <div class="section-heading">Student View</div>
+
+    <!-- 3) My Labs (Step 9) -->
+    <section id="student-my-labs" class="card">
+      <div class="card-header">
+        <div>
+          <div class="badge-role-label">STUDENT</div>
+          <div class="card-title">My Labs</div>
+          <div class="subtitle">
+            ขั้นตอนที่ 9: นักศึกษาเปิดหน้า My Labs เพื่อดูคะแนนและ feedback ของแต่ละ LAB
+          </div>
+        </div>
+        <div>
+          <span class="status-badge status-graded">Logged in as: 660100001 – Student A</span>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Lab</th>
+            <th>Status</th>
+            <th>Score</th>
+            <th>Feedback</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lab 1 – Intro to HTML</td>
+            <td><span class="status-badge status-graded">Graded</span></td>
+            <td>90 / 100</td>
+            <td>โครงสร้างดี อ่านง่าย</td>
+          </tr>
+          <tr>
+            <td>Lab 2 – CSS Basics</td>
+            <td><span class="status-badge status-submitted">Submitted</span></td>
+            <td>–</td>
+            <td>รอตรวจ</td>
+          </tr>
+          <tr>
+            <td>Lab 3 – HTML Layout</td>
+            <td><span class="status-badge status-graded">Graded</span></td>
+            <td>85 / 100</td>
+            <td>โครงสร้าง semantic ดี ปรับ spacing เพิ่มอีกเล็กน้อย</td>
+          </tr>
+          <tr>
+            <td>Lab 4 – Responsive Design</td>
+            <td><span class="status-badge status-not-submitted">Not submitted</span></td>
+            <td>–</td>
+            <td>–</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
