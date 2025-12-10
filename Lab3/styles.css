@@ -24,7 +24,7 @@
 
     /* TODO: Student – เลือก font ที่ต้องการ (จาก Google Fonts)
        แล้วไปเพิ่ม <link> ที่ index.html / about.html / my-labs.html */
-    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: 'Sarabun', sans-serif;
 }
 
 /* ---------- 2. Global Styles ---------- */
@@ -39,7 +39,7 @@ body {
     padding: 0;
     background: radial-gradient(circle at top, #1f2933 0%, #020617 55%);
     color: var(--color-text);
-    font-family: var(--font-sans);
+    font-family: 'Sarabun', sans-serif;
 }
 
 /* จำกัดความกว้างของ content ให้อ่านง่าย */
